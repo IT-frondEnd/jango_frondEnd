@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mening saytim</title>
+    <style>
+        /* Reset va asosiy shrift */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        h1, h2 {
+            margin-bottom: 1rem;
+        }
+        h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.3rem;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        li {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        li:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+        }
+        .price {
+            font-weight: 600;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+        .category {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+        .description {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .meta {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        @media (max-width: 600px) {
+            main {
+                margin: 1rem;
+            }
+            ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mening saytim</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Kategoriyalar</h2>
+            <ul>
+                {% for category in categories %}
+                    <li>{{ category.title }}</li>
+                {% empty %}
+                    <li>Kategoriyalar topilmadi</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section>
+            <h2>Mahsulotlar</h2>
+            <ul>
+                {% for product in products %}
+                    <li>
+                        <strong>{{ product.title }}</strong>
+                        <div class="price">Narxi: {{ product.price }} so'm</div>
+                        <div class="category">Kategoriya: {{ product.category.title }}</div>
+                        <div class="description">{{ product.description }}</div>
+                        <div class="meta">Qo‘shilgan sana: {{ product.created_at|date:"d-m-Y H:i" }}</div>
+                        <div class="meta">Mac manzili: {{ product.mac_adress }}</div>
+                    </li>
+                {% empty %}
+                    <li>Mahsulotlar topilmadi</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
